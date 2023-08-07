@@ -1,5 +1,12 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.schema import MetaData
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+# sessionmaker  a factor generating new sessions - session = doing somethign on the db 
+
+# Create a factory for creating threaded-local sessions, ensures each HTTP req has its own session and doesn't interfere with others 
+DBSession = scoped_session(sessionmaker())
 
 # Recommended naming convention used by Alembic, as various different database
 # providers will autogenerate vastly different names making migrations more
@@ -13,4 +20,6 @@ NAMING_CONVENTION = {
 }
 
 metadata = MetaData(naming_convention=NAMING_CONVENTION)
+
+# models will be defined as subclasaes of these, which will map to tables 
 Base = declarative_base(metadata=metadata)

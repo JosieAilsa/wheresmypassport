@@ -9,7 +9,7 @@ from sqlalchemy import (
 from ..meta import Base
 
 
-class User(Base):
+class UserModel(Base):
     __tablename__ = 'Users'
     id = Column(Integer, primary_key=True, nullable=False)
     username = Column(Text, nullable=False, unique=True)
@@ -21,4 +21,4 @@ class User(Base):
     def get_password(self, password):
         return bcrypt.checkpw(password.encode('utf8'), self.password.encode('utf8'))
 
-Index('index_user_name', User.username, unique=True)
+Index('index_user_name', UserModel.username, unique=True)

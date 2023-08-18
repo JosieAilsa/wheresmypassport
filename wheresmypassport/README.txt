@@ -31,6 +31,8 @@ Getting Started
 
         env/bin/alembic -c development.ini upgrade head
 
+After you fix the problem, please restart the Pyramid application to
+try it again.
 - Load default data into the database using a script.
 
     env/bin/initialize_wheresmypassport_db development.ini

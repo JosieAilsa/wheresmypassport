@@ -1,6 +1,8 @@
 import bcrypt
 
 from ..meta import Base
+from ..Case.Case import CaseModel
+from ..Passport.Passport import PassportModel
 from sqlalchemy import (
     Column,
     Index,
@@ -24,8 +26,9 @@ class UserModel(Base):
     def hash_password(self, password):
         return bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt()).decode('utf8')
         
-    # Many to 1 relationshuip User <--> Cases
-    cases = relationship("CaseModel", back_populates="user")
+    # Many to 1 relationship User <--> Cases
+    passports = relationship(PassportModel, back_populates="user")
+    cases = relationship(CaseModel, back_populates="user")
 
     def set_password(self, password):
         self.password = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt()).decode('utf8')

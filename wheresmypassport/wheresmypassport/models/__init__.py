@@ -6,6 +6,8 @@ import zope.sqlalchemy
 # Import or define all models here to ensure they are attached to the
 # ``Base.metadata`` prior to any initialization routines.
 from .User.User import UserModel  # flake8: noqa
+from .Case.Case import CaseModel
+from .Passport.Passport import PassportModel
 
 # Run ``configure_mappers`` after defining all of the models to ensure
 # all relationships can be setup.

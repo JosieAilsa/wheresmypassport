@@ -9,14 +9,16 @@ from sqlalchemy import (
     Integer,
     Text,
 )
+from sqlalchemy.dialects.postgresql import UUID
 
 from sqlalchemy.orm import relationship
 
 class UserModel(Base):
     __tablename__ = 'Users'
-    id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
     username = Column(Text, nullable=False, unique=True)
     password = Column(Text, nullable=False)
+    name = Column(Text, nullable=False)
 
     def __init__(self, username, password, *args, **kwargs):
         super(UserModel, self).__init__(*args, **kwargs)

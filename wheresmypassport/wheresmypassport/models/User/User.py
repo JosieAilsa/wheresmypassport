@@ -1,4 +1,5 @@
 import bcrypt
+import uuid
 
 from ..meta import Base
 from ..Case.Case import CaseModel

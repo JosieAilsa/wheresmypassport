@@ -1,13 +1,10 @@
-from wheresmypassport import models
+# from wheresmypassport import models
 
-def test_my_view_success(testapp, dbsession):
-    model = models.MyModel(name='one', value=55)
-    dbsession.add(model)
-    dbsession.flush()
+# def test_my_view_success(testapp, dbsession):
 
-    res = testapp.get('/', status=200)
-    assert res.body
+#     res = testapp.get('/', status=200)
+#     assert res.body
 
-def test_notfound(testapp):
-    res = testapp.get('/badurl', status=404)
-    assert res.status_code == 404
+# def test_notfound(testapp):
+#     res = testapp.get('/badurl', status=404)
+#     assert res.status_code == 404

@@ -1,6 +1,5 @@
-import bcrypt
 import uuid
-
+import bcrypt
 from ..meta import Base
 from ..Case.Case import CaseModel
 from ..Passport.Passport import PassportModel
@@ -11,20 +10,23 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.dialects.postgresql import UUID
-
 from sqlalchemy.orm import relationship
 
+
 class UserModel(Base):
+    """Base model for a user"""
+
     __tablename__ = 'Users'
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
     username = Column(Text, nullable=False, unique=True)
     password = Column(Text, nullable=False)
     name = Column(Text, nullable=False)
 
-    def __init__(self, username, password, *args, **kwargs):
-        super(UserModel, self).__init__(*args, **kwargs)
+    def __init__(self, username, password, name):
+        super(UserModel, self).__init__()
         self.username = username
         self.password = self.hash_password(password)
+        self.name = name
 
     def hash_password(self, password):
         return bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt()).decode('utf8')
@@ -38,5 +40,6 @@ class UserModel(Base):
 
     def get_password(self, password):
         return bcrypt.checkpw(password.encode('utf8'), self.password.encode('utf8'))
+    
 
 Index('index_user_name', UserModel.username, unique=True)
